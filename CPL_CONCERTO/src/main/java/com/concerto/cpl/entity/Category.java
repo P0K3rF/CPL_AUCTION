@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,17 +18,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
+
 @Entity
-@Table(name="Teams")
-public class Team {
-	
+@Table(name = "Category")
+public class Category {
 	@Id
-	@Column(name="TeamID")
-	private int teamId;
-	@Column(name = "TeamName")
-	private String teamName;
-	@Column(name = "Profile_Photo")
-	private String profilePhoto;
+	@Column(name = "CategoryId")
+	private int categoryId;
+	@Column(name = "CategoryName")
+	private String categoryName;
+	@Column(name = "Grade")
+	private String grade;
+	@Column(name = "Minimum_Bid")
+	private int minimumBid;
+	
 	@OneToMany(mappedBy = "team",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Player> players;
 }
