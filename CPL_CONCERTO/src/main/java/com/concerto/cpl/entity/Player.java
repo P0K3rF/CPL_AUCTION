@@ -14,11 +14,14 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 
 @Entity
 @Table(name = "Player")
@@ -52,4 +55,13 @@ public class Player {
 	private Category category;
 	@Column(name = "Profile_Photo")
 	private String playerPhoto;
+	@Override
+	public String toString() {
+		return "Player [playerId=" + playerId + ", playerName=" + playerName + ", playerDOB=" + playerDOB + ", playerBatStyle=" + playerBatStyle + ", playerBallStyle=" + playerBallStyle
+				+ ", playerDebut=" + playerDebut + ", playerRuns=" + playerRuns + ", playertotalWickets="
+				+ playertotalWickets + ", playerBallEconomy=" + playerBallEconomy + ", playerStrikeRate="
+				+ playerStrikeRate + ", playerPhoto=" + playerPhoto + "]";
+	}
+	
+	
 }

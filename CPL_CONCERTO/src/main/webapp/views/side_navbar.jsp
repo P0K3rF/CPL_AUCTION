@@ -9,7 +9,7 @@
 <body>
 <nav id="sidebar"  aria-labelledby="sidebar-header">
 			<div class="sidebar-header">
-				<h3>Ecommerce Application</h3>
+				<h3>Auction Master</h3>
 			</div>
 
 			<ul class="list-unstyled components">

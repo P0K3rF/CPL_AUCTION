@@ -32,6 +32,6 @@ public class Category {
 	@Column(name = "Minimum_Bid")
 	private int minimumBid;
 	
-	@OneToMany(mappedBy = "team",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Player> players;
 }
