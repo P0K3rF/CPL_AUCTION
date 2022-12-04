@@ -1,0 +1,11 @@
+CategoryId,CategoryName,Grade,Minimum_Bid
+1,"All Rounder",A+,500
+2,Batsman,A+,400
+3,Bowler,A+,400
+4,"All Rounder",A,300
+5,Batsman,A,300
+6,Bowler,A,300
+7,Batsman,B,200
+8,Bowler,B,200
+9,General,A,100
+10,UnCapped,A,100

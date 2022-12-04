@@ -1,0 +1,10 @@
+PlayerId,BowlEconomy,PlayerBallStyle,PlayerBatStyle,PlayerDOB,PlayerDebut,PlayerName,Profile_Photo,PlayerRuns,StrikeRate,TotalWickets,CategoryId,TeamId
+1003,NULL,NULL,Righ-hand-Batsman,"1993-01-10 00:00:00.000000",2009,"Rohit Sharma",rohitsharma.jpg,4000,150,NULL,5,NULL
+1004,7,Right-Arm-Faster,NULL,"1993-01-10 00:00:00.000000",2012,"Jasprit Bumrah",jaspritbumrah.jpg,NULL,NULL,50,3,NULL
+1005,NULL,NULL,Righ-hand-Batsman,"1993-01-10 00:00:00.000000",2007,"Virat Kohli",viratkohli.jpg,6000,250,NULL,4,NULL
+1006,NULL,NULL,Righ-hand-Batsman,"1993-01-10 00:00:00.000000",2003,"Ms Dhoni",msdhoni.jpg,8000,200,NULL,5,NULL
+1007,9,Right-Arm-Seamer,NULL,"1993-01-10 00:00:00.000000",2011,"Bhuveneshwar Kumar",bhuveneshwarkumar.jpg,NULL,NULL,30,6,NULL
+1008,NULL,NULL,Righ-hand-Batsman,"1993-01-10 00:00:00.000000",2014,"Suryakumar Yadav",suryakimaryadav.jpg,2000,250,NULL,7,NULL
+1009,10,Right-Arm-Faster,NULL,"1993-01-10 00:00:00.000000",2021,"Arshdeep Singh",arshdeepsing.jpg,NULL,NULL,15,8,NULL
+1010,NULL,NULL,Righ-hand-Batsman,"1993-01-10 00:00:00.000000",2016,"Sanju samson",sanjusamson.jpg,4000,130,NULL,9,NULL
+1011,NULL,NULL,Righ-hand-Batsman,"1993-01-10 00:00:00.000000",2016,"Umesh Yadav",umeshyadav.jpg,4000,130,NULL,10,NULL
