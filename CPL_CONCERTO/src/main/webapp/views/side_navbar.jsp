@@ -13,9 +13,7 @@
 			</div>
 
 			<ul class="list-unstyled components">
-				<li><a href="http://localhost:8081/">Home</a></li>
-				<li><a href="http://localhost:8081/customer/order">Order</a></li>
-				<li><a href="http://localhost:8081/customer/profile">Profile</a></li>
+				<li><a href="http://10.10.11.35:8083/homepage">Home</a></li>
 			</ul>
 		</nav>
 </body>

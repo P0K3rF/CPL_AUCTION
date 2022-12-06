@@ -2,16 +2,22 @@ package com.concerto.cpl.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
+import com.concerto.cpl.entity.Category;
+import com.concerto.cpl.entity.Team;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class PlayerDataDto {
+@Getter
+@Setter
+
+public class PlayerResponseDto {
+
 	private String playerName;
 	private String playerDOB;
 	private String playerDebut;
@@ -31,7 +37,5 @@ public class PlayerDataDto {
 	private Integer highestRuns;
 
 	private String bestOver;
-	private int increaseBy;
-	private int maximum_bid;
-	
+
 }

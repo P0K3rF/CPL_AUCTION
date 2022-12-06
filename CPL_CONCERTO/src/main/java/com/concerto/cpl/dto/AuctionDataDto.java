@@ -8,9 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class CategoryAndPageDto {
-	private String categoryName;
-	private String categoryGrade;
-	private int pageNo;
-	private String filter;
+public class AuctionDataDto {
+
+	private int auctionMasterId;
+	private int playerId;
+	private int teamId;
+	private boolean sold;
+	private int bidPrice;
 }

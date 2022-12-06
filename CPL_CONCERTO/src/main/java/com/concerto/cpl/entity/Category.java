@@ -31,6 +31,10 @@ public class Category {
 	private String grade;
 	@Column(name = "Minimum_Bid")
 	private int minimumBid;
+	@Column(name = "MaximumBid")
+	private Integer maximumBid;
+	@Column(name = "IncreaseBid")
+	private Integer increaseBid;
 	
 	@OneToMany(mappedBy = "category",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Player> players;

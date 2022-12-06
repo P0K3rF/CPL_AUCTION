@@ -1,6 +1,7 @@
 package com.concerto.cpl.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -21,6 +22,14 @@ public class TeamService {
 			return this.teamRespository.getTeamNames();
 		}
 		throw new EntityNotFoundException("No Team found");
+	}
+	
+	public int getTeamIdByTeamName(String teamName) {
+		
+	Optional<Team> optionalTeam=this.teamRespository.findByTeamName(teamName);
+	if(optionalTeam.isPresent())	
+		return optionalTeam.get().getTeamId();
+	throw new EntityNotFoundException("Team not found");
 	}
 
 }

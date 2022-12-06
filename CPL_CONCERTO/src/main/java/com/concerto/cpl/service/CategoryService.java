@@ -36,11 +36,10 @@ public class CategoryService {
 	public Category getCategoryByNameAndGrade(String categoryName, String categoryGrade) throws Exception {
 		try {
 			
-		Integer CategoryId = this.categoryRepository.findCategoryIdByCategoryNameAndGrade(categoryName, categoryGrade);
-		Category category = new Category();
-		category.setCategoryId(CategoryId);
-		return category;
-		}
+	return this.categoryRepository.findCategoryByCategoryNameAndGrade(categoryName, categoryGrade).get();
+		
+
+				}
 		catch(Exception e) {
 			throw new Exception("No Category Found");
 		}

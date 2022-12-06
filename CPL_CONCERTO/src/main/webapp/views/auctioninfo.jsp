@@ -47,8 +47,8 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-2">
-							<select class="form-select" aria-label="Default select example">
-								<option selected>Teams</option>
+							<select class="form-select" aria-label="Default select example" onchange="getTeamPlayers()" id="team">
+								<option selected disabled="disabled">Teams</option>
 
 								<c:forEach items="${teams}" var="team">
 									<option>${team}</option>
@@ -81,6 +81,37 @@
 				</div>
 
 			</div>
+			
+			
+			
+			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3" id="Player Details">
+			
+				
+			
+			
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</div>
 
 	</div>
@@ -94,8 +125,33 @@
 		crossorigin="anonymous"></script>
 	<script>
 		function auctionPage() {
-			window.location.href = "http://localhost:8083/auction";
+			window.location.href = "http://10.10.11.35:8083/auction";
 		}
+		
+		function getTeamPlayers(){
+			let team=$('#team').find(":selected").text();
+			
+			$.ajax({
+				type : "POST",
+				contentType : 'application/json; charset=utf-8',
+				dataType : 'json',
+				url : 'getplayerbyname',
+				data : JSON.stringify({"teamName":team}),
+				success : function(result) {
+					
+					$.each
+				},error:function(xhr, status, error){
+					
+				}
+				
+				
+				
+			})
+			
+			
+			
+		}
+		
 	</script>
 </body>
 </html>

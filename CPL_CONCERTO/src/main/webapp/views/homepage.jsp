@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,54 +37,24 @@
 				<hr>
 				<div class="card-body">
 					<div class="row">
-						<div class="col-3">
+					
+					<c:forEach items="${auction}" var="auction">
+							<div class="col-3 offset-1">
 							<div class="card">
 								<div class="card-body text-center">
-									<h4>CPL 2021</h4>
+									<h4>${auction.auctionName}</h4>
 									<img class="card-img-top img-fluid img-responsive"
 										src="../images/cpl 2021.jfif" alt="Suresh Dasari Card"
 										style="height: 140px; width: 250px;">
 								</div>
 								<div class="card-footer text-center">
 									<a class="btn btn-outline-warning text-dark"
-										href="http://localhost:8083/auctioninfo?n=cpl&y=2021"
-										id="addCart">Go to CPL 2021  </a>
+										href="http://10.10.11.35:8083/auctioninfo?name=${auction.auctionName}"
+										id="addCart">Go to ${auction.auctionName} </a>
 								</div>
 							</div>
 						</div>
-					<div class="col-3 offset-1">
-							<div class="card">
-
-								<div class="card-body text-center">
-									<h4>IPL 2022</h4>
-									<img class="card-img-top img-fluid img-responsive"
-										src="../images/ipl 2022.jfif" alt="Suresh Dasari Card"
-										style="height: 140px; width: 250px;">
-								</div>
-								<div class="card-footer text-center">
-									<a class="btn btn-outline-warning text-dark"
-										href="http://localhost:8083/auctioninfo?n=ipl&y=2022"
-										id="addCart">Go to IPL 2022</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-3 offset-1">
-							<div class="card">
-
-								<div class="card-body text-center">
-									<h4>CPL 2023</h4>
-									<img class="card-img-top img-fluid img-responsive"
-										src="../images/cpl 2023.jfif" alt="Suresh Dasari Card"
-										style="height: 140px; width: 250px;">
-
-								</div>
-								<div class="card-footer text-center">
-									<a class="btn btn-outline-warning text-dark"
-										href="http://localhost:8083/auctioninfo?n=cpl&y=2023"
-										id="addCart">Go to CPL 2023</a>
-								</div>
-							</div>
-						</div>
+								</c:forEach>
 					</div>
 				</div>
 			</div>

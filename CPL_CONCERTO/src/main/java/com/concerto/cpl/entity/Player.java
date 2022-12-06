@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -35,6 +37,7 @@ public class Player {
 	private Date playerDOB;
 	@ManyToOne
 	@JoinColumn(name = "TeamId")
+	@JsonIgnore
 	private Team team;
 	@Column(name = "PlayerBatStyle")
 	private String playerBatStyle;
@@ -52,16 +55,33 @@ public class Player {
 	private String playerStrikeRate;
 	@ManyToOne
 	@JoinColumn(name = "CategoryId")
+	@JsonIgnore
 	private Category category;
 	@Column(name = "Profile_Photo")
 	private String playerPhoto;
+	
+	@Column(name = "Fifties")
+	private Integer fifties;
+	@Column(name = "Hundreds")
+	private Integer hundreds;
+	@Column(name = "HighestRuns")
+	private Integer highestRuns;
+	@Column(name="BestBowling")
+	private String bestOver;
 	@Override
 	public String toString() {
-		return "Player [playerId=" + playerId + ", playerName=" + playerName + ", playerDOB=" + playerDOB + ", playerBatStyle=" + playerBatStyle + ", playerBallStyle=" + playerBallStyle
-				+ ", playerDebut=" + playerDebut + ", playerRuns=" + playerRuns + ", playertotalWickets="
-				+ playertotalWickets + ", playerBallEconomy=" + playerBallEconomy + ", playerStrikeRate="
-				+ playerStrikeRate + ", playerPhoto=" + playerPhoto + "]";
+		return "Player [playerId=" + playerId + ", playerName=" + playerName + ", playerDOB=" + playerDOB
+				+ ", playerBatStyle=" + playerBatStyle + ", playerBallStyle=" + playerBallStyle + ", playerDebut="
+				+ playerDebut + ", playerRuns=" + playerRuns + ", playertotalWickets=" + playertotalWickets
+				+ ", playerBallEconomy=" + playerBallEconomy + ", playerStrikeRate=" + playerStrikeRate
+				+ ", playerPhoto=" + playerPhoto + ", fifties=" + fifties + ", hundreds=" + hundreds + ", highestRuns="
+				+ highestRuns + ", bestOver=" + bestOver + "]";
 	}
+	
+	
+	
+	
+
 	
 	
 }
