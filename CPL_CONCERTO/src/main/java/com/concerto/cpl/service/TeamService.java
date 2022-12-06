@@ -24,6 +24,15 @@ public class TeamService {
 		throw new EntityNotFoundException("No Team found");
 	}
 	
+	public Team getTeamDetailsById( String teamId)
+	{
+		if(this.teamRespository.count()>0) {
+			
+			return this.teamRespository.findById(Integer.parseInt(teamId)).get();
+		}
+		throw new  EntityNotFoundException("No teams are available ");
+	}
+	
 	public int getTeamIdByTeamName(String teamName) {
 		
 	Optional<Team> optionalTeam=this.teamRespository.findByTeamName(teamName);
@@ -31,5 +40,16 @@ public class TeamService {
 		return optionalTeam.get().getTeamId();
 	throw new EntityNotFoundException("Team not found");
 	}
+	
+	
+	public List<Team> getAllTeam()
+	{
+		if(this.teamRespository.count()>0) {
+			
+			return this.teamRespository.findAll();
+		}
+		throw new  EntityNotFoundException("No teams are available ");
+	}
+	
 
 }

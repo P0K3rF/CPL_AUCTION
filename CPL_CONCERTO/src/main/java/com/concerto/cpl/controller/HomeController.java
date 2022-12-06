@@ -63,12 +63,34 @@ public class HomeController {
 		if (session.getAttribute("admin") != null) {
 			session.setAttribute("auction", name);
 			m.addAttribute("name", name);
-			m.addAttribute("teams", this.teamService.getAllTeamsName());
+			m.addAttribute("teamsData", this.teamService.getAllTeam());
+			m.addAttribute("playersData", this.playerService.getAllPlayer());
+			m.addAttribute("categories", this.categoryService.getAllCategory());
 			return "auctioninfo";
 		}
 
 		return "redirect:login";
 	}
+	
+	@GetMapping("/teamdetails")
+	public String teamDetails(@RequestParam(required = true, name = "teamId") String teamId, Model m,
+			HttpSession session) {
+		if (session.getAttribute("admin") != null) {
+
+			// You will get team Id or Team Name here
+
+		 	// check if null then
+			if (teamId != null) {
+				m.addAttribute("teamDetails", this.teamService.getTeamDetailsById(teamId));
+				m.addAttribute("playerList", this.playerService.getPlayerListByTeamId(teamId));
+			}
+
+			return "teamdetails";
+		}
+
+		return "login";
+	}
+	
 
 	@GetMapping("/auction")
 	public String renderAuctionPage(HttpSession session, Model m) {

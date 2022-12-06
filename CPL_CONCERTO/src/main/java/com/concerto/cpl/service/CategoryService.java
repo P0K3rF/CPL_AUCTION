@@ -32,12 +32,19 @@ public class CategoryService {
 		}
 		throw new EntityNotFoundException("No Category There");
 	}
+	
+	public List<Category> getAllCategory()
+	{
+		if(this.categoryRepository.count()>0) {
+			return this.categoryRepository.findAll();
+		}
+		throw new EntityNotFoundException("No Category available");
+	}
 
 	public Category getCategoryByNameAndGrade(String categoryName, String categoryGrade) throws Exception {
 		try {
 			
 	return this.categoryRepository.findCategoryByCategoryNameAndGrade(categoryName, categoryGrade).get();
-		
 
 				}
 		catch(Exception e) {
