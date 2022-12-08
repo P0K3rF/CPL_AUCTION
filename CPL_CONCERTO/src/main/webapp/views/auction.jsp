@@ -19,12 +19,22 @@
 	object-fit: contain;
 }
 
+#soldimg {
+position: absolute;
+    left: 69px;
+    top: 233px;
+    z-index: 1;
+    opacity: 0.7;
+    transform: rotate(-20deg);
+}
+
 #tooltip {
 	display: none;
 	position: absolute;
 	cursor: pointer;
 	color: red;
-	/*   left: 100px; */ top : 80px;
+	/*   left: 100px; */
+	top: 80px;
 	border: solid 1px #eee;
 	background-color: #ffffdd;
 	padding: 10px;
@@ -106,11 +116,13 @@
 				<div class="card-body" id="playerData">
 					<div class="row">
 						<div class="col-2 mx-3" style="border: 2px solid">
-
+							<div>
+								  <img id="soldimg" src="../images/Sold images.jpg" height="80px" width="100px">
+							</div>
 							<img class="card-img-top img-fluid img-responsive"
 								id="profile-photo" alt="Suresh Dasari Card"
 								style="height: 250px; width: 200px;" onerror=this.src="../images/defaultprofile.png">
-							<div id="sold" style="display: none">SOLD</div>
+
 						</div>
 
 						<div class="col-3" style="border-right: 2px solid green">
@@ -315,7 +327,6 @@
 		var resultSize=0;
 		var pageNext=0;
 		function searchPlayer(pageno) {
-			console.log(pageno)
 			let category = $('#category').find(":selected").val();
 			let grade = $('#Grade').find(":selected").val();
 			let filter=$('#Filter').find(":selected").val();
@@ -356,12 +367,14 @@
 					}else{
 						console.log(result)
 						if(result.filter=="sold"){
-							$('#sold').show()
+							
+							$('#soldimg').show()
 							$('#sold-btn').hide()
 							$('#unsold-btn').hide()
 							$('#Bidding-Details').hide()
 						}
 						else{
+							$('#soldimg').hide()
 							$('#sold').hide()
 							$('#sold-btn').show()
 							$('#unsold-btn').show()
