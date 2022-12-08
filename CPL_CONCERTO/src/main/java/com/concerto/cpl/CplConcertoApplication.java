@@ -53,19 +53,19 @@ public class CplConcertoApplication {
 	  
 	  public void getData() throws ParseException {
 	  
-			  
+			  this.playerService.getPlayerListByTeamId("1").forEach(System.out::println);
 
 			  
-			  
+//			  System.out.println(this.auctionRepository.findBidPriceByPlayerId(101235));
 			  
 			  
 //	  for(int i=1;i<9;i++) {
 //		  this.respository.save(new Team(i, "Team"+i, "team"+i+".jpg", null));
 //	  }
 		  
-		  Category category=new Category();
-		  category.setCategoryId(4);
-		  this.playerRepository.findPlayerByCategory(category).forEach(System.out::println);
+//		  Category category=new Category();
+//		  category.setCategoryId(4);
+//		  this.playerRepository.findPlayerByCategory(category).forEach(System.out::println);
 //		  
 //		  java.util.Date d = new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.of(1996,04,10).toString());
 //		  

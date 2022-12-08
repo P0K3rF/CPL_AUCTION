@@ -23,4 +23,8 @@ public interface AuctionRepository extends JpaRepository<Auction, Integer>{
 	
 	@Query(nativeQuery = true,value="select count(*) from player where Teamid=?")
 	public Integer getSoldPlayerCount(@Param(value="Teamid")int teamId);
+	
+	@Query(nativeQuery = true,value="select BidPrice from Auction where PlayerId=?")
+	public Integer getBidPriceOfPlayer(@Param(value="PlayerId")int playerId);
+	
 }

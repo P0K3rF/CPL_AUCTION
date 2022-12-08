@@ -33,6 +33,11 @@ public class AuctionMasterService {
 		throw new EntityNotFoundException("Auction not found");
 	}
 	
-	
+	public AuctionMaster getAuctionByAuctionName(String auctionName) {
+		Optional<AuctionMaster> optionalAuction=this.auctionMasterRepository.findByAuctionName(auctionName);
+		if(optionalAuction.isPresent())	
+			return optionalAuction.get();
+		throw new EntityNotFoundException("Auction not found");
+	}
 	
 }

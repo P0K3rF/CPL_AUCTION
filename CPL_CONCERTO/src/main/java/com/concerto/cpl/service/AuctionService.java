@@ -14,46 +14,59 @@ import com.concerto.cpl.repository.AuctionRepository;
 public class AuctionService {
 
 	@Autowired
-	AuctionRepository auctionRepository;		
-	
+	AuctionRepository auctionRepository;
+
 	@Autowired
 	PlayerService playerService;
-	
+
 	@Autowired
 	AuctionMasterService auctionMasterService;
-	
+
 	public boolean checkForUnsoldPlayer(int playerId) {
-		int playerCheck=this.auctionRepository.checkForUnsoldPlayer(playerId);
-		if(playerCheck<=0) {
+		int playerCheck = this.auctionRepository.checkForUnsoldPlayer(playerId);
+		if (playerCheck <= 0) {
 			return true;
-		}
-		else 
-		{
+		} else {
 			return false;
 		}
 	}
+
+	public Integer getPurseLeft(int teamId) {
+		if(this.auctionRepository.getRemainingPrice(teamId)==null || this.auctionRepository.getRemainingPrice(teamId)<0)
+		{
+			return 0;
+		}
+		return this.auctionRepository.getRemainingPrice(teamId);
+	}
+	
+	
+	public Integer getBidAmountOfPlayer(int playerId) {
+		return this.auctionRepository.getBidPriceOfPlayer(playerId);
+	}
+	
+	
+	
+	
 	
 	public boolean insertAuctionData(AuctionDataDto auctionDataDto) {
-	Auction auction=BeanMapper.convertAuctionDataDtoToAuction(auctionDataDto);
-	
-	if(this.auctionRepository.getRemainingPrice(auction.getTeamId())==null && this.auctionRepository.getSoldPlayerCount(auction.getTeamId())==null) {
-	if(this.auctionRepository.getRemainingPrice(auction.getTeamId())<=8500 && this.auctionRepository.getSoldPlayerCount(auction.getTeamId())<=20) {
-		
-		if(auction.isSold()) {
-			this.playerService.updateTeamForPlayer(auction.getTeamId(), auction.getPlayerId());		
+		Auction auction = BeanMapper.convertAuctionDataDtoToAuction(auctionDataDto);
+//	Integer getRemainingPrice=this.auctionRepository.getRemainingPrice(auction.getTeamId());
+//	Integer getTotalPlayers=this.auctionRepository.getSoldPlayerCount(auction.getTeamId());
+
+		if (this.auctionRepository.getRemainingPrice(auction.getTeamId()) == null
+				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) == 0
+				|| this.auctionRepository.getRemainingPrice(auction.getTeamId()) <= 8500
+				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) <= 20) 
+		{
+			this.playerService.updateTeamForPlayer(auction.getTeamId(), auction.getPlayerId());
+			this.auctionRepository.save(auction);
+			return true;
 		}
-		this.auctionRepository.save(auction);
-		return true;
-		
+		return false;
 	}
-	}
-	return false;
-	}
-	
-	
-	
-	public List<Auction> getAuctions(int teamId){
+
+	public List<Auction> getAuctions(int teamId) {
 		return this.auctionRepository.getPlayerFromTeam(teamId);
 	}
-	
+
 }

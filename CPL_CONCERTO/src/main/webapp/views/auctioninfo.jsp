@@ -13,11 +13,12 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <link rel="stylesheet" href="/css/style.css">
+
 <style>
 .card-img-top {
 	object-fit: contain;
 }
-
+/* Style the tab */
 .tab {
 	overflow: hidden;
 	border: 1px solid #ccc;
@@ -64,6 +65,31 @@
 .topright:hover {
 	color: red;
 }
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 80%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+}
+
+th {
+	background-color: #555;
+	color: #fff;
+}
+
+/*  tr:nth-child(odd) {
+  background-color: #eee;
+}  */
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+}
+
 </style>
 </head>
 <body>
@@ -74,34 +100,199 @@
 
 		<div class="container" id="main-container">
 			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3">
-				<div class="card-title text-center my-2">
+				<div class="card-title my-2">
 					<div class="row">
-						<div class="col-8">
-							<h1>${name.toUpperCase()}${year}Information</h1>
+						<div class="col-5 offset-4">
+							<h3>${name.toUpperCase()}${year}</h3>
 						</div>
-						<div class="col-2 offset-1 ">
+						<div class="col-2 ">
 							<button class="btn btn-success rounded-pill btn-lg"
 								onclick="auctionPage()">Auction Page</button>
-						</div>
-						<div class="row">
-							<div class="col-2 offset-9 my-2">
-								<span class="fas fa-hand-point-up fa-bounce fa-xl px-3"></span>
-							</div>
 						</div>
 					</div>
 					<hr>
 				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-3" style="border-right: 2px solid green">
+							<img class="card-img-top img-fluid img-responsive"
+								src="../images/cpl 2021.jfif" alt="Suresh Dasari Card"
+								style="height: 140px; width: 250px;">
+						</div>
+						<div class="col-4">
+							<h5>Auction Id
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+								&nbsp;${auction.auctionId}</h5>
+							<h5>Teams
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+								&nbsp; 8</h5>
+							<h5>Players
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+								&nbsp;${playerCount}</h5>
+							<h5>PointsPerTeam : ${auction.pointsPerTeam}</h5>
+						</div>
+					</div>
+
+				</div>
 			</div>
 			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3"
 				id="Player Details">
-				<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-  </ul>
+				<div class="tab">
+					<button class="tablinks" onclick="openCity(event, 'Teams')"
+						id="defaultOpen">Teams</button>
+					<button class="tablinks" onclick="openCity(event, 'Players')">Players</button>
+					<button class="tablinks" onclick="openCity(event, 'Owners')">Owners</button>
+					<button class="tablinks" onclick="openCity(event, 'Categories')">Categories</button>
+				</div>
+
+				<div id="Teams" class="tabcontent">
+					<span onclick="this.parentElement.style.display='none'"
+						class="topright">&times</span>
+
+					<div class="container">
+						<div class="card-body">
+							<div class="row">
+								<h1>${teams}</h1>
+								<c:forEach items="${teamsData}" var="teams">
+									<div class="col-3 my-3">
+										<div class="card">
+											<div class="card body text-center">
+												<h4>${teams.getTeamName()}</h4>
+
+
+												<img class="card-img-top img-fluid img-responsive"
+													src="../images/${teams.getProfilePhoto()}"
+													alt="Suresh Dasari Card"
+													style="height: 140px; width: 250px;">
+											</div>
+											<div class="card-footer text-center">
+												<a class="btn btn-outline-warning text-dark"
+													href="http://10.10.11.35:8083/teamdetails?teamId=${teams.teamId}"
+													id="addCart">View Profile </a>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="Players" class="tabcontent">
+				<span onclick="this.parentElement.style.display='none'"
+					class="topright">&times</span>
+				<div class="container">
+					<div class="card-body">
+						<div class="row">
+							<h1>${Player}</h1>
+							<c:forEach items="${playersData}" var="Player">
+								<div class="col-3 my-2">
+									<div class="card">
+										<div class="cart body text-center">
+											<h4>${Player.getPlayerName()}</h4>
+											<img class="card-img-top img-fluid img-responsive"
+												src="../images/${Player.getPlayerPhoto()}" 
+												style="height: 140px; width: 250px;" alt="" onerror=this.src="../images/defaultprofile.png">
+										</div>
+										<div class="card-footer text-center">
+											<a class="btn btn-outline-warning text-dark"
+												href="http://10.10.11.35:8083/auctioninfo?n=cpl&y=2021"
+												id="addCart">View Profile </a>
+										</div>
+
+
+
+									</div>
+
+
+								</div>
+							</c:forEach>
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+			<div id="Owners" class="tabcontent">
+				<span onclick="this.parentElement.style.display='none'"
+					class="topright">&times</span>
+
+				<div class="container">
+					<div class="card-body">
+						<div class="row">
+						
+						
+						
+						<table class="offset" class="center"
+				style="border: 4px solid black">
+				
+				<tr>
+					<th>Team name</th>
+					<th>Owners name</th>
+					
+				</tr>
+				<c:forEach items="${owners}" var="owner">
+					<tr>
+					
+						<%-- <td>${playerIterate.playerPhoto }</td> --%>
+						<td>${owner.team.teamName}</td>
+						<td>${owner.ownerName}</td>
+						
+						
+					</tr>
+				</c:forEach>
+				</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="Categories" class="tabcontent">
+				<span onclick="this.parentElement.style.display='none'"
+					class="topright">&times</span>
+				<div class="container">
+					<div class="card-body">
+
+						<div class="row">
+						
+				
+				<table class="offset" class="center"
+				style="border: 4px solid black">
+				
+				<tr>
+					<th>Category Name</th>
+					<th>Grade</th>
+					<th>minimumBid</th>
+					<th>maximumBid</th>
+					
+				</tr>
+				<c:forEach items="${categories}" var="Category">
+					<tr>
+					
+						<%-- <td>${playerIterate.playerPhoto }</td> --%>
+						<td>${Category.getCategoryName()}</td>
+						<td>${Category.grade}</td>
+						<td>${Category.minimumBid}</td>
+						<td>${Category.maximumBid}</td>
+					</tr>
+				</c:forEach>
+				</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
+
+
+
+
+
 
 	</div>
 
@@ -113,11 +304,26 @@
 		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 		crossorigin="anonymous"></script>
 	<script>
+		function openCity(evt, cityName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(
+						" active", "");
+			}
+			document.getElementById(cityName).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
 		function auctionPage() {
 			window.location.href = "http://10.10.11.35:8083/auction";
 		}
-		
-	
 	</script>
 </body>
 </html>

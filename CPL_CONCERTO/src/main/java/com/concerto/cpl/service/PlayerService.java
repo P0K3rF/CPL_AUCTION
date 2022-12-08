@@ -12,8 +12,10 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.concerto.cpl.dto.PlayerDetailsInTeamDto;
 import com.concerto.cpl.entity.Category;
 import com.concerto.cpl.entity.Player;
+import com.concerto.cpl.mapper.BeanMapper;
 import com.concerto.cpl.repository.PlayerRepository;
 import com.concerto.cpl.util.PagingList;
 
@@ -43,15 +45,18 @@ public class PlayerService {
 		}
 		throw new EntityNotFoundException("No players are available");
 	}
-	
-	public List<Player> getPlayerListByTeamId(String teamId){
-		List<Player> PlayerListResult = new ArrayList<>();
+
+	public List<PlayerDetailsInTeamDto> getPlayerListByTeamId(String teamId){
+		
+		
+		List<PlayerDetailsInTeamDto> PlayerListResult = new ArrayList<>();
 		if(this.playerRepository.count()>0) {
 			List<Player> playerList =  this.playerRepository.findAll();
 			for (Player iteratePlayer : playerList) {
 				if(iteratePlayer.getTeam() != null ) {
 					if(iteratePlayer.getTeam().getTeamId() == (Integer.parseInt(teamId))) {
-						PlayerListResult.add(iteratePlayer);
+						
+						PlayerListResult.add(BeanMapper.convertPlayerToPlayerDetailsInTeamDto(iteratePlayer, this.auctionService.getBidAmountOfPlayer(iteratePlayer.getPlayerId())));
 					}
 				}
 				
@@ -61,7 +66,6 @@ public class PlayerService {
 		}
 		throw new EntityNotFoundException("No players are available");
 	}
-	
 
 	public void updateTeamForPlayer(int TeamId, int PlayerId) {
 

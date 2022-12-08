@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.concerto.cpl.dto.LoginRequestDto;
+import com.concerto.cpl.repository.OwnerRepository;
 import com.concerto.cpl.service.AuctionMasterService;
+import com.concerto.cpl.service.AuctionService;
 import com.concerto.cpl.service.CategoryService;
+import com.concerto.cpl.service.OwnerService;
 import com.concerto.cpl.service.PlayerService;
 import com.concerto.cpl.service.TeamService;
 
@@ -20,6 +23,8 @@ public class HomeController {
 
 	@Autowired
 	TeamService teamService;
+	@Autowired
+	AuctionService auctionService;
 
 	@Autowired
 	CategoryService categoryService;
@@ -29,6 +34,9 @@ public class HomeController {
 
 	@Autowired
 	AuctionMasterService auctionMasterService;
+	
+	@Autowired
+	OwnerService ownerService;
 	
 	@GetMapping({ "/", "index" })
 	public String renderHomePage() {
@@ -60,12 +68,16 @@ public class HomeController {
 
 	@GetMapping("/auctioninfo")
 	public String auctionInfo(@RequestParam(required = true, name = "name") String name, HttpSession session, Model m) {
+		
 		if (session.getAttribute("admin") != null) {
 			session.setAttribute("auction", name);
 			m.addAttribute("name", name);
+			m.addAttribute("auction",this.auctionMasterService.getAuctionByAuctionName(name));
+			m.addAttribute("playerCount",this.playerService.getAllPlayer().size());
 			m.addAttribute("teamsData", this.teamService.getAllTeam());
 			m.addAttribute("playersData", this.playerService.getAllPlayer());
 			m.addAttribute("categories", this.categoryService.getAllCategory());
+			m.addAttribute("owners", this.ownerService.getAllOwner());
 			return "auctioninfo";
 		}
 
@@ -83,6 +95,11 @@ public class HomeController {
 			if (teamId != null) {
 				m.addAttribute("teamDetails", this.teamService.getTeamDetailsById(teamId));
 				m.addAttribute("playerList", this.playerService.getPlayerListByTeamId(teamId));
+			m.addAttribute("ownerName",this.ownerService.getOwnerNameByTeamId(Integer.parseInt(teamId)));
+				int remainingPlayers=20-this.playerService.getPlayerListByTeamId(teamId).size();
+			m.addAttribute("remainingPlayers",remainingPlayers);			
+			int purseLeft=8500-this.auctionService.getPurseLeft(Integer.parseInt(teamId));
+			m.addAttribute("purseLeft",purseLeft);
 			}
 
 			return "teamdetails";

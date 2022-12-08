@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 
 import com.concerto.cpl.dto.AuctionDataDto;
 import com.concerto.cpl.dto.PlayerDataDto;
+import com.concerto.cpl.dto.PlayerDetailsInTeamDto;
 import com.concerto.cpl.dto.PlayerResponseDto;
 import com.concerto.cpl.entity.Auction;
 import com.concerto.cpl.entity.Player;
@@ -25,8 +26,8 @@ public class BeanMapper {
 		Date d= player.getPlayerDOB();
 	
 		SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy");// FOrmat in This Format or you change Change as well 
-		String Format= format.format(d);
-		playerDataDto.setPlayerDOB(Format);
+		String formats= format.format(d);
+		playerDataDto.setPlayerDOB(formats);
 		playerDataDto.setPlayerDebut(player.getPlayerDebut());
 		playerDataDto.setMinimumBid(player.getCategory().getMinimumBid());
 		playerDataDto.setPlayerPhoto(player.getPlayerPhoto());
@@ -53,6 +54,17 @@ public class BeanMapper {
 		auction.setTeamId(auctionDataDto.getTeamId());
 		auction.setSold(auctionDataDto.isSold());
 		return auction;
+		
+	}
+	
+	
+	public static PlayerDetailsInTeamDto convertPlayerToPlayerDetailsInTeamDto(Player p,int BidPrice) {
+		PlayerDetailsInTeamDto dto=new PlayerDetailsInTeamDto();
+		dto.setPlayerName(p.getPlayerName());
+		dto.setCategoryName(p.getCategory().getCategoryName());
+		dto.setProfilePhoto(p.getPlayerPhoto());
+		dto.setFinalBidPrice(BidPrice);
+		return dto;
 		
 	}
 	

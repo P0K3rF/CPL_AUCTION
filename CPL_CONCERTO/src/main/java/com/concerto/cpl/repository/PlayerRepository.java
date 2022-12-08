@@ -28,4 +28,5 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 	@Modifying
 	@Query(nativeQuery = true,value="update Player set TeamId=? where PlayerId=?")
 	public void updateTeamIdForPlayer(@Param(value = "TeamId")int TeamId,@Param(value = "PlayerId")int playerId);
+
 }
