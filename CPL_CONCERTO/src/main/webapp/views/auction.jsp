@@ -20,14 +20,17 @@
 }
 
 #soldimg {
-position: absolute;
-    left: 69px;
-    top: 233px;
-    z-index: 1;
-    opacity: 0.7;
-    transform: rotate(-20deg);
+	position: absolute;
+	left: 69px;
+	top: 233px;
+	z-index: 1;
+	opacity: 0.7;
+	transform: rotate(-20deg);
 }
-
+.display-6 {
+    font-size: calc(0.1rem + 1vw);
+    line-height: 2;
+}
 #tooltip {
 	display: none;
 	position: absolute;
@@ -52,7 +55,7 @@ position: absolute;
 			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3">
 
 				<div class="card-title text-center my-2">
-					<h3>Welcome to Auction Page</h3>
+					<h3>Welcome to CPL 2023 Auction</h3>
 					<hr>
 				</div>
 				<div class="card-body">
@@ -117,7 +120,8 @@ position: absolute;
 					<div class="row">
 						<div class="col-2 mx-3" style="border: 2px solid">
 							<div>
-								  <img id="soldimg" src="../images/Sold images.jpg" height="80px" width="100px">
+								<img id="soldimg" src="../images/Sold images.jpg" height="80px"
+									width="100px">
 							</div>
 							<img class="card-img-top img-fluid img-responsive"
 								id="profile-photo" alt="Suresh Dasari Card"
@@ -126,52 +130,66 @@ position: absolute;
 						</div>
 
 						<div class="col-3" style="border-right: 2px solid green">
-							<label for="firstName" style="margin-top: 5%"> Name :</label> <input
-								type="text" class="form-control font-weight-bold" id="name"
-								name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Date of Birth :</label>
-							<input type="text" class="form-control font-weight-bold" id="Dob"
-								name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Debut :</label> <input
-								type="text" class="form-control font-weight-bold" id="Debut"
-								name="firstName" readonly="readonly">
+							<label for="firstName" class="fw-light" style="margin-top: 5%">Full Name </label>
+							<br>
+							<label class="fw-bold display-6" id="name"></label>
+							<br>
+								<label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Date of Birth :</label>
+							<br>
+							<label class="fw-bold display-6" id="Dob"></label>
+							<br>
+								<label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Debut :</label> 
+								<br>
+								<label class="fw-bold display-6" id="Debut"></label>
+								<br>
 						</div>
 
 						<div class="col-2 ">
-							<label for="firstName" style="margin-top: 5%"> Batstyle :</label>
-							<input type="text" class="form-control font-weight-bold"
-								id="Batstyle" name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Total Runs :</label> <input
-								type="text" class="form-control font-weight-bold" id="Runs"
-								name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Strike Rate :</label> <input
-								type="text" class="form-control font-weight-bold"
-								id="Strike-Rate" name="firstName" readonly="readonly">
+							<label for="firstName" class="fw-light" style="margin-top: 5%"> Batstyle :</label>
+							<br>
+							<label class="fw-bold" id="Batstyle"></label>
+							<br>
+								 <label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Total Runs :</label>
+								 <br>
+								 <label class="fw-bold" id="Runs"></label>
+								 <br>
+								<label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Twenties :</label> 
+							<br>
+							<label class="fw-bold" id="Twenties"></label>
+							<br>
 						</div>
 						<div class="col-2 ">
-							<label for="firstName" style="margin-top: 5%"> Fifties :</label>
-							<input type="text" class="form-control font-weight-bold"
-								id="Fifties" name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Hundreds :</label> <input
-								type="text" class="form-control font-weight-bold" id="Hundreds"
-								name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Highest Run :</label> <input
-								type="text" class="form-control font-weight-bold" id="Highest"
-								name="firstName" readonly="readonly">
+							<label for="firstName" class="fw-light" style="margin-top: 5%"> Thirties :</label>
+							<br>
+							 <label class="fw-bold display-6" id="Thirties"></label>
+						<br>
+								 <label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Fifties :</label>
+								 <br>
+								 <label class="fw-bold display-6" id="Fifties"></label>
+				                <br>
+								<label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Highest Run :</label>
+								 <br>
+								 <label class="fw-bold display-6" id="Highest"></label>
+								<br>
 						</div>
 						<div class="col-2 ">
-							<label for="firstName" style="margin-top: 5%"> BallStyle
-								:</label> <input type="text" class="form-control font-weight-bold"
-								id="BallStyle" name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Total Wickets :</label>
-							<input type="text" class="form-control font-weight-bold"
-								id="Wickets" name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Economy :</label> <input
-								type="text" class="form-control font-weight-bold" id="Economy"
-								name="firstName" readonly="readonly"> <label
-								for="firstName" style="margin-top: 5%"> Best Over :</label> <input
-								type="text" class="form-control font-weight-bold" id="Over"
-								name="firstName" readonly="readonly">
+							<label for="firstName" class="fw-light" style="margin-top: 5%"> BallStyle
+								:</label> 
+								<br>
+								 <label class="fw-bold" id="BallStyle"></label>
+								<br>
+								 <label
+								for="firstName" class="fw-light" style="margin-top: 5%"> Total Wickets :</label>
+						    <br>
+							<label class="fw-bold display-6" id="Wickets"></label>
+						<br>
+								
 						</div>
 
 
@@ -327,6 +345,10 @@ position: absolute;
 		var resultSize=0;
 		var pageNext=0;
 		function searchPlayer(pageno) {
+			$('#increase-btn').show()
+			$('#decrease-btn').hide()
+			$("#tooltip").hide();
+			$("#team").prop("selectedIndex", 0);
 			let category = $('#category').find(":selected").val();
 			let grade = $('#Grade').find(":selected").val();
 			let filter=$('#Filter').find(":selected").val();
@@ -363,8 +385,9 @@ position: absolute;
 					if(result.statusCode==401){
 						
 						$('#playerDetailCard').hide()
-						swal('No Data Found')
-					}else{
+						swal('No Player Found')
+					}
+					else{
 						console.log(result)
 						if(result.filter=="sold"){
 							
@@ -400,50 +423,60 @@ position: absolute;
 							'../images/' + result.data.playerPhoto);
 					$('#profile-photo').attr('alt','../images/defaultprofile.png')
 
-					$('#name').val(result.data.playerName)
-					$('#Dob').val(result.data.playerDOB)
-					$('#Debut').val(result.data.playerDebut)
-					$('#Fifties').val(result.data.fifties)
-					$('#Hundreds').val(result.data.hundreds)
-					$('#Highest').val(result.data.highestRuns)
-					$('#Over').val(result.data.bestOver)
-					$('#Total-Price').val(result.data.minimumBid)
+					$('#name').text(result.data.playerName)
+					$('#Dob').text(result.data.playerDOB)
+					$('#Debut').text(result.data.playerDebut)
+					$('#Fifties').text(result.data.fifties)
+					$('#Hundreds').text(result.data.hundreds)
+					$('#Highest').text(result.data.highestRuns)
+					$('#Over').text(result.data.bestOver)
+					$('#Total-Price').text(result.data.minimumBid)
 
 					$('#playerCount').html('('+pageNext+'/'+resultSize+')')
 					if (result.data.playerBatStyle == null) {
-						$('#Batstyle').val('--')
+						$('#Batstyle').text('--')
 					} else {
-						$('#Batstyle').val(result.data.playerBatStyle)
+						$('#Batstyle').text(result.data.playerBatStyle)
 					}
-
+				if(result.data.highestRuns==null){
+					$('#Highest').text('--')
+				}else{
+					$('#Highest').text(result.data.highestRuns)
+				}
+				if(result.data.fifties==null){
+					$('#Fifties').text('--')
+				}else{
+					$('#Fifties').text(result.data.fifties)
+				}
+					
 					if (result.data.playerRuns == null) {
-						$('#Runs').val('--')
+						$('#Runs').text('--')
 					} else {
-						$('#Runs').val(result.data.playerRuns)
+						$('#Runs').text(result.data.playerRuns)
 					}
 
 					if (result.data.playerStrikeRate == null) {
-						$('#Strike-Rate').val('--')
+						$('#Strike-Rate').text('--')
 					} else {
-						$('#Strike-Rate').val(result.data.playerStrikeRate)
+						$('#Strike-Rate').text(result.data.playerStrikeRate)
 					}
 
 					if (result.data.playerBallStyle == null) {
-						$('#BallStyle').val('--')
+						$('#BallStyle').text('--')
 					} else {
-						$('#BallStyle').val(result.data.playerBallStyle)
+						$('#BallStyle').text(result.data.playerBallStyle)
 					}
 
 					if (result.data.playertotalWickets == null) {
-						$('#Wickets').val('--')
+						$('#Wickets').text('--')
 					} else {
-						$('#Wickets').val(result.data.playertotalWickets)
+						$('#Wickets').text(result.data.playertotalWickets)
 					}
 
 					if (result.data.playerBallEconomy == null) {
-						$('#Economy').val('--')
+						$('#Economy').text('--')
 					} else {
-						$('#Economy').val(result.data.playerBallEconomy)
+						$('#Economy').text(result.data.playerBallEconomy)
 					}
 
 					$('#Base-Price').val(result.data.minimumBid)
@@ -505,15 +538,22 @@ position: absolute;
 				url : 'insertauctiondata',
 				data : JSON.stringify(data),
 				success : function(result) {
-			
-					if(temp){
-						$('#Increased').val(0)
-						swal($('#name').val() + ' Sold to ' + $('#team').find(":selected").text())
-						.then((value)=>searchPlayer(pageNext+1))
-					}else{
-						swal($('#name').val() + ' Unsold')
-						.then((value)=>searchPlayer(pageNext+1))
-					}
+			console.log(result.statusCode)
+			if(result.statusCode==403){
+				swal('Team ' + $('#team').find(":selected").text() + ' has exceeded Maximum Purse Amount')
+			}else if(result.statusCode==405){
+				swal('Team '+$('#team').find(":selected").text() + ' already have 20 players Cannot exceed more')
+			}else if(result.statusCode==200){
+				if(temp){
+					$('#Increased').val(0)
+					swal($('#name').val() + ' Sold to ' + $('#team').find(":selected").text())
+					.then((value)=>searchPlayer(pageNext+1))
+				}else{
+					swal($('#name').val() + ' Unsold')
+					.then((value)=>searchPlayer(pageNext+1))
+				}
+			}
+					
 				},error:function(xhr, status, error)
 				{
 					

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.concerto.cpl.Exceptions.MaximumAmountReachedException;
+import com.concerto.cpl.Exceptions.MaximumSoldPlayerReachedException;
 import com.concerto.cpl.dto.AuctionDataDto;
 import com.concerto.cpl.entity.Auction;
 import com.concerto.cpl.mapper.BeanMapper;
@@ -50,19 +52,38 @@ public class AuctionService {
 	
 	public boolean insertAuctionData(AuctionDataDto auctionDataDto) {
 		Auction auction = BeanMapper.convertAuctionDataDtoToAuction(auctionDataDto);
-//	Integer getRemainingPrice=this.auctionRepository.getRemainingPrice(auction.getTeamId());
-//	Integer getTotalPlayers=this.auctionRepository.getSoldPlayerCount(auction.getTeamId());
-
-		if (this.auctionRepository.getRemainingPrice(auction.getTeamId()) == null
-				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) == 0
-				|| this.auctionRepository.getRemainingPrice(auction.getTeamId()) <= 8500
-				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) <= 20) 
-		{
+	
+		
+		System.out.println(this.auctionRepository.getRemainingPrice(auction.getTeamId()));
+		System.out.println(this.auctionRepository.getSoldPlayerCount(auction.getTeamId()));
+		
+		
+	Integer remainingPrice=this.auctionRepository.getRemainingPrice(auction.getTeamId());
+	Integer soldPlayer=this.auctionRepository.getSoldPlayerCount(auction.getTeamId());
+	
+	if(remainingPrice==null || remainingPrice+auction.getBidPrice()<=8500) {
+		
+		if(soldPlayer==0 || soldPlayer+1 <=20) {
 			this.playerService.updateTeamForPlayer(auction.getTeamId(), auction.getPlayerId());
 			this.auctionRepository.save(auction);
 			return true;
+		}else {
+			throw new MaximumSoldPlayerReachedException("Your Team has Reached Maximum Player Limit");
 		}
-		return false;
+	}else {
+		throw new MaximumAmountReachedException("Your Purse amount has exceeded the Limit");
+	}
+	
+//		if (this.auctionRepository.getRemainingPrice(auction.getTeamId()) == null
+//				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) == 0
+//				|| this.auctionRepository.getRemainingPrice(auction.getTeamId()) <= 8500
+//				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) <= 20) 
+//		{
+////			this.playerService.updateTeamForPlayer(auction.getTeamId(), auction.getPlayerId());
+////			this.auctionRepository.save(auction);
+//			return true;
+//		}
+//		return false;
 	}
 
 	public List<Auction> getAuctions(int teamId) {

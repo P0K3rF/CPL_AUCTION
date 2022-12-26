@@ -16,7 +16,9 @@
 
 <style>
 .card-img-top {
-	object-fit: contain;
+	width: 60%;
+	height: 15vw;
+	object-fit: fill;
 }
 /* Style the tab */
 .tab {
@@ -65,6 +67,7 @@
 .topright:hover {
 	color: red;
 }
+
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
@@ -88,13 +91,13 @@ th {
 tr:nth-child(even) {
 	background-color: #dddddd;
 }
-}
 
+}
 </style>
 </head>
 <body>
 
-	<div class="wrapper">
+	<div class="wrapper ">
 
 		<%@include file="side_navbar.jsp"%>
 
@@ -146,32 +149,142 @@ tr:nth-child(even) {
 				</div>
 
 				<div id="Teams" class="tabcontent">
-					<span onclick="this.parentElement.style.display='none'"
-						class="topright">&times</span>
+					
 
-					<div class="container">
-						<div class="card-body">
-							<div class="row">
-								<h1>${teams}</h1>
-								<c:forEach items="${teamsData}" var="teams">
-									<div class="col-3 my-3">
-										<div class="card">
-											<div class="card body text-center">
+					<div class="container" >
+						<div class="card-body mb-2 bg-white rounded h-9" id="for-image">
+							<div class="row ">
+									<%int count=0; %>
+								<c:forEach items="${teamsData}" var="teams" varStatus="outerloop">
+									<div class=" col-lg-4 my-3 mb-3 d-flex align-items-stretch">
+										<div class="card" id="border-success<%=1+count %>" style="width: 340px">
+										
+										
+											<div class="card body text-center d-flex flex-column">
 												<h4>${teams.getTeamName()}</h4>
-
-
-												<img class="card-img-top img-fluid img-responsive"
-													src="../images/${teams.getProfilePhoto()}"
-													alt="Suresh Dasari Card"
-													style="height: 140px; width: 250px;">
+										<hr>		
+									
+												<div class="container mb-2" >
+													<img id="i-<%=1+count%>" class="card-img-top img-fluid px-2"
+														src="../images/${teams.getProfilePhoto()}" alt="img"
+														style="height: 200px; width: 250px;">
+												</div>
+												<%++count;%>
+												
 											</div>
-											<div class="card-footer text-center">
-												<a class="btn btn-outline-warning text-dark"
+											<div class="card-footer align-items-center d-flex justify-content-center">
+												<a class="btn btn-outline-warning text-dark "
 													href="http://10.10.11.35:8083/teamdetails?teamId=${teams.teamId}"
-													id="addCart">View Profile </a>
+													id="addCart"><h6>View Profile</h6> </a>
 											</div>
 										</div>
 									</div>
+									<script>
+									
+								
+								
+								    function toDataURL(src, callback, outputFormat) {
+							            let image = new Image();
+							            image.crossOrigin = 'Anonymous';
+							            image.onload = function () {
+							                let canvas = document.createElement('canvas');
+							                let ctx = canvas.getContext('2d');
+							                let dataURL;
+							                canvas.height = this.naturalHeight;
+							                canvas.width = this.naturalWidth;
+							                ctx.drawImage(this, 0, 0);
+							                dataURL = canvas.toDataURL(outputFormat);
+							                callback(dataURL);
+							            };
+							            image.src = src;
+							            if (image.complete || image.complete === undefined) {
+							                image.src = "data:image/png;base64, R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+							                image.src = src;
+							            }
+							        }
+								    
+							        toDataURL(document.getElementById('i-<%=count%>').getAttribute('src'),
+							            function (dataUrl) {      
+							        	document.getElementById('i-<%=count%>').src = dataUrl;
+							                var rgb = getAverageRGB(document.getElementById('i-<%=count%>'));
+							                
+							               if(rgb.r<220 && rgb.g<220 && rgb.b<220){
+							                document.getElementById("border-success<%=count%>").style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';							            	   
+							                document.getElementById("border-success<%=count%>").style.boxShadow= '0 0 20px 0 rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+							               }
+							               else{
+							                   document.getElementById("border-success<%=count%>").style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';							            	   
+								                document.getElementById("border-success<%=count%>").style.boxShadow= '0 0 20px 0 rgb(70 70 70)'; 
+							               }
+							            }
+							        )
+
+							        function getAverageRGB(imgEl) {
+	
+							            var blockSize = 5, // only visit every 5 pixels
+							                defaultRGB = { r: 0, g: 0, b: 0 }, // for non-supporting envs
+							                canvas = document.createElement('canvas'),
+							                context = canvas.getContext && canvas.getContext('2d'),
+							                data, width, height,
+							                i = -4,
+							                length,
+							                rgb = { r: 0, g: 0, b: 0 },
+							                count = 0;
+
+							            if (!context) {
+							                return defaultRGB;
+							            }
+
+							            height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+							            width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+							            context.drawImage(imgEl, 0, 0);
+
+							            try {
+							                data = context.getImageData(0, 0, width, height);
+							            } catch (e) {
+							        /* security error, img on diff domain */alert('x');
+							                return defaultRGB;
+							            }
+
+							            length = data.data.length;
+
+							            while ((i += blockSize * 4) < length) {
+							                ++count;
+							                rgb.r += data.data[i];
+							                rgb.g += data.data[i + 1];
+							                rgb.b += data.data[i + 2];
+							            }
+
+							            // ~~ used to floor values
+							            rgb.r = ~~(rgb.r / count);
+							            rgb.g = ~~(rgb.g / count);
+							            rgb.b = ~~(rgb.b / count);
+
+							            return rgb;
+
+							        }
+									
+									
+									
+									
+							    
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									</script>
 								</c:forEach>
 							</div>
 						</div>
@@ -191,9 +304,10 @@ tr:nth-child(even) {
 									<div class="card">
 										<div class="cart body text-center">
 											<h4>${Player.getPlayerName()}</h4>
-											<img class="card-img-top img-fluid img-responsive"
-												src="../images/${Player.getPlayerPhoto()}" 
-												style="height: 140px; width: 250px;" alt="" onerror=this.src="../images/defaultprofile.png">
+											<%-- <img class="card-img-top img-fluid img-responsive"
+												src="../images/${Player.getPlayerPhoto()}"
+												style="height: 140px; width: 250px;" alt=""
+												onerror=this.src="../images/defaultprofile.png"> --%>
 										</div>
 										<div class="card-footer text-center">
 											<a class="btn btn-outline-warning text-dark"
@@ -224,28 +338,28 @@ tr:nth-child(even) {
 				<div class="container">
 					<div class="card-body">
 						<div class="row">
-						
-						
-						
-						<table class="offset" class="center"
-				style="border: 4px solid black">
-				
-				<tr>
-					<th>Team name</th>
-					<th>Owners name</th>
-					
-				</tr>
-				<c:forEach items="${owners}" var="owner">
-					<tr>
-					
-						<%-- <td>${playerIterate.playerPhoto }</td> --%>
-						<td>${owner.team.teamName}</td>
-						<td>${owner.ownerName}</td>
-						
-						
-					</tr>
-				</c:forEach>
-				</table>
+
+
+
+							<table class="offset" class="center"
+								style="border: 4px solid black">
+
+								<tr>
+									<th>Team name</th>
+									<th>Owners name</th>
+
+								</tr>
+								<c:forEach items="${owners}" var="owner">
+									<tr>
+
+										<%-- <td>${playerIterate.playerPhoto }</td> --%>
+										<td>${owner.team.teamName}</td>
+										<td>${owner.ownerName}</td>
+
+
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -259,29 +373,29 @@ tr:nth-child(even) {
 					<div class="card-body">
 
 						<div class="row">
-						
-				
-				<table class="offset" class="center"
-				style="border: 4px solid black">
-				
-				<tr>
-					<th>Category Name</th>
-					<th>Grade</th>
-					<th>minimumBid</th>
-					<th>maximumBid</th>
-					
-				</tr>
-				<c:forEach items="${categories}" var="Category">
-					<tr>
-					
-						<%-- <td>${playerIterate.playerPhoto }</td> --%>
-						<td>${Category.getCategoryName()}</td>
-						<td>${Category.grade}</td>
-						<td>${Category.minimumBid}</td>
-						<td>${Category.maximumBid}</td>
-					</tr>
-				</c:forEach>
-				</table>
+
+
+							<table class="offset" class="center"
+								style="border: 4px solid black">
+
+								<tr>
+									<th>Category Name</th>
+									<th>Grade</th>
+									<th>minimumBid</th>
+									<th>maximumBid</th>
+
+								</tr>
+								<c:forEach items="${categories}" var="Category">
+									<tr>
+
+										<%-- <td>${playerIterate.playerPhoto }</td> --%>
+										<td>${Category.getCategoryName()}</td>
+										<td>${Category.grade}</td>
+										<td>${Category.minimumBid}</td>
+										<td>${Category.maximumBid}</td>
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -324,6 +438,30 @@ tr:nth-child(even) {
 		function auctionPage() {
 			window.location.href = "http://10.10.11.35:8083/auction";
 		}
+		
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 </body>
 </html>

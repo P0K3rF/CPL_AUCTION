@@ -34,8 +34,9 @@ public class TeamService {
 	}
 	
 	public int getTeamIdByTeamName(String teamName) {
-		
+		System.out.println(teamName);
 	Optional<Team> optionalTeam=this.teamRespository.findByTeamName(teamName);
+	System.out.println(optionalTeam.get());
 	if(optionalTeam.isPresent())	
 		return optionalTeam.get().getTeamId();
 	throw new EntityNotFoundException("Team not found");

@@ -24,54 +24,59 @@
 	object-fit: contain;
 }
 </style>
-<style type="text/css">
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 80%;
-}
 
-td, th {
-	border: 1px solid #dddddd;
-	text-align: center;
-	padding: 8px;
-}
 
-th {
-	background-color: #555;
-	color: #fff;
-}
 
-/*  tr:nth-child(odd) {
-  background-color: #eee;
-}  */
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-}
-</style>
-<style>
-.card {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	transition: 0.3s;
-	width: 100%;
-}
-
-.card:hover {
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.container {
-	padding: 2px 16px;
-}
-</style>
 </head>
 <body>
 
 
-	
-	
-	<div class="container">
+	<div class="container my-3">
+		<div class="table-responsive">
+			<table
+				class="table table-hover table-bordered table-info border-warning">
+				<thead>
+				<tr>
+				<th> <img class="card-img-top img-fluid img-responsive"
+							src="../images/${teamDetails.profilePhoto}"
+							alt="Default" style="height: 100px; width: 150px;"></th>
+				</thead>
+				<thead>
+					<tr>
+					<th>Player</th>
+					<th>Player Name</th>
+					<th>Category</th>
+					<th>Final price</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Sit</td>
+						<td>Amet</td>
+						<td>Consectetur</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Adipisicing</td>
+						<td>Elit</td>
+						<td>Sint</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Hic</td>
+						<td>Fugiat</td>
+						<td>Temporibus</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+
+
+	<%-- 	<div class="container">
 	<div class="col-2 offset-10 " style="margin-bottom:1%">
 		<button class="btn btn-success rounded-pill btn-lg"
 			onclick="auction()">Auction Page</button>
@@ -115,7 +120,7 @@ tr:nth-child(even) {
 				<c:forEach items="${playerList}" var="playerIterate">
 					<tr>
 					 <td><img src="../images/${playerIterate.profilePhoto}" height="100" width="100" onerror=this.src="../images/defaultprofile.png"	></td>
-						<%-- <td>${playerIterate.playerPhoto }</td> --%>
+						<td>${playerIterate.playerPhoto }</td>
 						<td>${playerIterate.playerName }</td>
 						<td>${playerIterate.categoryName }</td>
 						<td>${playerIterate.finalBidPrice}</td>
@@ -126,7 +131,7 @@ tr:nth-child(even) {
 			</table>
 		</div>
 	</div>
-	</div>
+	</div> --%>
 
 
 	<script>

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.concerto.cpl.Exceptions.MaximumAmountReachedException;
+import com.concerto.cpl.Exceptions.MaximumSoldPlayerReachedException;
 import com.concerto.cpl.dto.AuctionDataDto;
 import com.concerto.cpl.dto.AuctionRequestDto;
 import com.concerto.cpl.dto.CategoryAndPageDto;
@@ -69,7 +71,6 @@ public class AjaxControllers {
 		try {
 			Category category = this.categoryService.getCategoryByNameAndGrade(categoryAndPageDto.getCategoryName(),
 					categoryAndPageDto.getCategoryGrade());
-			System.out.println(category);
 			map = this.playerService.getPlayerData(category, categoryAndPageDto.getPageNo(),categoryAndPageDto.getFilter());
 			Player player = (Player) map.get("data");
 			PlayerDataDto pdo=BeanMapper.convertPlayerTolayerDataDto(player);
@@ -95,9 +96,15 @@ public class AjaxControllers {
 		auctionDataDto.setPlayerId(this.playerService.getPlayerIdByPlayerName(auctionRequestDto.getPlayerName()));
 		auctionDataDto.setSold(auctionRequestDto.isSold());
 		auctionDataDto.setBidPrice(auctionRequestDto.getBidPrice());
-		if (this.auctionService.insertAuctionData(auctionDataDto))
-			return new ResponseData<>(200, "SUCCESS");
-		return new ResponseData<>(401, "Failed");
+		try {
+		this.auctionService.insertAuctionData(auctionDataDto);
+		return new ResponseData<>(200, "SUCCESS");
+		}catch(MaximumAmountReachedException maximumAmountReachedException) {
+			return new ResponseData<>(403,maximumAmountReachedException.getMessage());
+		}catch(MaximumSoldPlayerReachedException maximumSoldPlayerReachedException) {
+			return new ResponseData<>(405,maximumSoldPlayerReachedException.getMessage());
+		}
+		
 
 	}
 
@@ -112,7 +119,7 @@ public class AjaxControllers {
 		                    .map(Auction::getPlayerId)
 		                    .map(pid->this.playerService.getPlayerById(pid))
 		                    .collect(Collectors.toList());
-	System.out.println(players);
+	
 	
 		return new ResponseData<>(200, players);
 		

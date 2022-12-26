@@ -49,12 +49,13 @@ public class CplConcertoApplication {
 	@Autowired
 	AuctionRepository auctionRepository;
 	
-//		  @Bean
+		  @Bean
 	  
 	  public void getData() throws ParseException {
 	  
-			  this.playerService.getPlayerListByTeamId("1").forEach(System.out::println);
-
+//			  this.playerService.getPlayerListByTeamId("1").forEach(System.out::println);
+		 
+		  System.out.println(respository.findByTeamName("Concerto Dhadakebaz"));
 			  
 //			  System.out.println(this.auctionRepository.findBidPriceByPlayerId(101235));
 			  
