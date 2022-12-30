@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import com.concerto.cpl.dto.TeamDetailsDto;
 import com.concerto.cpl.entity.Auction;
 import com.concerto.cpl.entity.Category;
 import com.concerto.cpl.entity.Player;
@@ -23,13 +24,15 @@ import com.concerto.cpl.repository.AuctionRepository;
 import com.concerto.cpl.repository.CategoryRepository;
 import com.concerto.cpl.repository.PlayerRepository;
 import com.concerto.cpl.repository.TeamRespository;
+import com.concerto.cpl.service.AuctionService;
 import com.concerto.cpl.service.PlayerService;
+import com.concerto.cpl.service.TeamService;
 
 @SpringBootApplication
 public class CplConcertoApplication {
 
 	@Autowired
-	TeamRespository respository;
+	TeamService respository;
 	
 	@Autowired
 	PlayerRepository playerRepository;
@@ -45,6 +48,8 @@ public class CplConcertoApplication {
 	@Autowired
 	PlayerService playerService;
 	
+	@Autowired
+	AuctionService auctionService;
 	
 	@Autowired
 	AuctionRepository auctionRepository;
@@ -54,8 +59,10 @@ public class CplConcertoApplication {
 	  public void getData() throws ParseException {
 	  
 //			  this.playerService.getPlayerListByTeamId("1").forEach(System.out::println);
-		 
-		  System.out.println(respository.findByTeamName("Concerto Dhadakebaz"));
+		
+			
+			  
+//		  System.out.println(playerRepository.findByPlayerName("Vishal Utekar"));
 			  
 //			  System.out.println(this.auctionRepository.findBidPriceByPlayerId(101235));
 			  

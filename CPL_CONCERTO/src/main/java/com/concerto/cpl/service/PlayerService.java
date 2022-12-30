@@ -29,6 +29,7 @@ public class PlayerService {
 	AuctionService auctionService;
 
 	public int getPlayerIdByPlayerName(String playerName) {
+		System.out.println(playerName);
 		Optional<Player> optionalPlayer = this.playerRepository.findByPlayerName(playerName);
 		if (optionalPlayer.isPresent())
 			return optionalPlayer.get().getPlayerId();
@@ -81,6 +82,7 @@ public class PlayerService {
 			List<Player> listofSoldPlayer = players.stream()
 					.filter(p -> !auctionService.checkForUnsoldPlayer(p.getPlayerId())).collect(Collectors.toList());
 			Optional<Player> p = PagingList.getPage(listofSoldPlayer, pageNo, 1).stream().findFirst();
+		
 			if (p.isPresent()) {
 				map.put("filter", "sold");
 				map.put("data", p.get());

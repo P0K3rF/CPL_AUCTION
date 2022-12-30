@@ -52,16 +52,11 @@ public class AuctionService {
 	
 	public boolean insertAuctionData(AuctionDataDto auctionDataDto) {
 		Auction auction = BeanMapper.convertAuctionDataDtoToAuction(auctionDataDto);
-	
-		
-		System.out.println(this.auctionRepository.getRemainingPrice(auction.getTeamId()));
-		System.out.println(this.auctionRepository.getSoldPlayerCount(auction.getTeamId()));
-		
 		
 	Integer remainingPrice=this.auctionRepository.getRemainingPrice(auction.getTeamId());
 	Integer soldPlayer=this.auctionRepository.getSoldPlayerCount(auction.getTeamId());
 	
-	if(remainingPrice==null || remainingPrice+auction.getBidPrice()<=8500) {
+	if(remainingPrice==null || remainingPrice+auction.getBidPrice()<=10000) {
 		
 		if(soldPlayer==0 || soldPlayer+1 <=20) {
 			this.playerService.updateTeamForPlayer(auction.getTeamId(), auction.getPlayerId());
@@ -73,21 +68,17 @@ public class AuctionService {
 	}else {
 		throw new MaximumAmountReachedException("Your Purse amount has exceeded the Limit");
 	}
-	
-//		if (this.auctionRepository.getRemainingPrice(auction.getTeamId()) == null
-//				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) == 0
-//				|| this.auctionRepository.getRemainingPrice(auction.getTeamId()) <= 8500
-//				&& this.auctionRepository.getSoldPlayerCount(auction.getTeamId()) <= 20) 
-//		{
-////			this.playerService.updateTeamForPlayer(auction.getTeamId(), auction.getPlayerId());
-////			this.auctionRepository.save(auction);
-//			return true;
-//		}
-//		return false;
 	}
 
 	public List<Auction> getAuctions(int teamId) {
 		return this.auctionRepository.getPlayerFromTeam(teamId);
 	}
-
+	
+	public Integer getReaminingPrice(int teamId) {
+		return this.auctionRepository.getRemainingPrice(teamId);
+	}
+	
+	public Integer getSoldPlayerCount(int teamId) {
+		return this.auctionRepository.getSoldPlayerCount(teamId);
+	}
 }

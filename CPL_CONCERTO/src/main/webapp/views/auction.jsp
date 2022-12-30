@@ -21,16 +21,25 @@
 
 #soldimg {
 	position: absolute;
-	left: 69px;
-	top: 233px;
+	left: 57px;
+	top: 175px;
 	z-index: 1;
 	opacity: 0.7;
 	transform: rotate(-20deg);
 }
-.display-6 {
-    font-size: calc(0.1rem + 1vw);
-    line-height: 2;
+
+.card-title {
+	margin-bottom: 0 !important;
 }
+
+.display-6 {
+	font-size: calc(0.1rem + 1vw);
+	line-height: 2;
+}
+.modal-lg, .modal-xl {
+    --bs-modal-width: 1000px;
+}
+
 #tooltip {
 	display: none;
 	position: absolute;
@@ -44,6 +53,14 @@
 	z-index: 1;
 	top: 80px
 }
+.hr {
+    margin: 0;
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    opacity: .25;
+}
+
 </style>
 </head>
 <body>
@@ -52,17 +69,17 @@
 		<%@include file="side_navbar.jsp"%>
 
 		<div class="container" id="main-container">
-			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3">
+			<div class="card shadow bg-white rounded mx-3">
+				<div class="card-body" style="padding: 0.2rem;">
+					<div class="row text-center">
+						<h5>Welcome to CPL 2023 Auction</h5>
+					</div>
+					<hr style="padding: 0px; margin: 0.4rem 0">
 
-				<div class="card-title text-center my-2">
-					<h3>Welcome to CPL 2023 Auction</h3>
-					<hr>
-				</div>
-				<div class="card-body">
 					<div class="row">
 
 
-						<div class="col-3">
+						<div class="col-2" style="margin-left: 20px;width: 17.66666667%;">
 							<select class="form-select" aria-label="Default select example"
 								id="category" required>
 								<option value="" selected="selected" disabled="disabled">Category</option>
@@ -72,7 +89,7 @@
 								</c:forEach>
 							</select>
 						</div>
-						<div class="col-3">
+						<div class="col-2" style="width: 15.66666667%;">
 							<select class="form-select" aria-label="Default select example"
 								id="Grade">
 								<option selected disabled="disabled" value="">Grade</option>
@@ -84,12 +101,10 @@
 
 						</div>
 
-						<div class="col-2">
+						<div class="col-2" style="width: 14.66666667%;">
 							<select class="form-select" aria-label="Default select example"
 								id="Filter">
 								<option selected value="All">All</option>
-
-
 								<option value="Sold">Sold</option>
 								<option value="UnSold">Unsold</option>
 
@@ -97,24 +112,58 @@
 
 						</div>
 
-						<div class="col-1">
+						<div class="col-1" style="width: 10.33333333%;">
 							<button class="btn btn-success" type="submit"
 								onclick="searchPlayer(1)">Search</button>
 						</div>
-
+						<div class="col-3 mx-4">
+							<a class="btn btn-primary text-white" onclick="getTeamDetails()"
+								role="button" data-bs-toggle="modal" data-bs-target="#Team-Detail-Modal"><i class="fa-solid fa-book-open-reader"></i>Team Details</a>
+						</div>
 					</div>
 
 				</div>
 			</div>
+			
+			
+			<div class="modal fade " id="Team-Detail-Modal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Team Details</h5>
+				</div>
+				<div class="modal-body" id="modalbody">
+				
+				<div class="row" id="modal-row">
+
+				</div>
+				
+				
+				</div>				
+				</div>
+		
+				<div class="modal-footer text-center" id="modalfooter">
+				
+				</div>
+				
+			</div>
+		</div>
+			
+
 			<hr>
 			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3"
-				style="display: none" id="playerDetailCard">
-
+				id="playerDetailCard" style="display: none">
 				<div class="card-title mx-3 my-3">
-					<h3>
-						Player Details: <span id="playerCount"></span>
-					</h3>
-					<hr>
+					<div class="row">
+						<div class="col-4">
+							<h6>
+								Player Details: <span id="playerCount"></span>
+							</h6>
+						</div>
+						<div class="col-4 offset-3"></div>
+					</div>
+					<hr style="margin:0px">
 				</div>
 				<div class="card-body" id="playerData">
 					<div class="row">
@@ -125,28 +174,69 @@
 							</div>
 							<img class="card-img-top img-fluid img-responsive"
 								id="profile-photo" alt="Suresh Dasari Card"
-								style="height: 250px; width: 200px;" onerror=this.src="../images/defaultprofile.png">
+								style="height: 210px; width: 200px;" onerror=this.src="../images/defaultprofile.png">
 
 						</div>
 
-						<div class="col-3" style="border-right: 2px solid green">
-							<label for="firstName" class="fw-light" style="margin-top: 5%">Full Name </label>
+
+
+
+						<div class="col-3"
+							style="border-right: 2px solid green; width: 22%;">
+							<label for="firstName" class="fw-light" style="margin-top: 5%">Full
+								Name </label> <br> <label class="fw-bold display-6" id="name"></label>
+							<br> <label for="firstName" class="fw-light"
+								style="margin-top: 5%"> Date of Birth :</label> <br> <label
+								class="fw-bold display-6" id="Dob"></label> <br> <label
+								for="firstName" class="fw-light" style="margin-top: 5%">
+								Debut :</label> <br> <label class="fw-bold display-6" id="Debut"></label>
 							<br>
-							<label class="fw-bold display-6" id="name"></label>
-							<br>
-								<label
-								for="firstName" class="fw-light" style="margin-top: 5%"> Date of Birth :</label>
-							<br>
-							<label class="fw-bold display-6" id="Dob"></label>
-							<br>
-								<label
-								for="firstName" class="fw-light" style="margin-top: 5%"> Debut :</label> 
-								<br>
-								<label class="fw-bold display-6" id="Debut"></label>
-								<br>
 						</div>
 
-						<div class="col-2 ">
+						<div class="col-6">
+							<div class="row">
+								<div class="col-6">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Batstyle :</label> <br> <label class="fw-bold display-6"
+										id="Batstyle"></label> <br>
+								</div>
+								<div class="col-6">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Ballstyle :</label> <br> <label class="fw-bold display-6"
+										id="BallStyle"></label> <br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-4">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Twenties :</label> <br> <label class="fw-bold" id="Twenties"></label>
+									<br>
+								</div>
+								<div class="col-4">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Thirties :</label> <br> <label class="fw-bold display-6"
+										id="Thirties"></label> <br>
+								</div>
+								<div class="col-4">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Fifties :</label> <br> <label class="fw-bold display-6"
+										id="Fifties"></label> <br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-4">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Total Runs :</label> <br> <label class="fw-bold display-6"
+										id="Runs"></label> <br>
+								</div>
+								<div class="col-4">
+									<label for="firstName" class="fw-light" style="margin-top: 5%">
+										Total Wickets :</label> <br> <label class="fw-bold display-6"
+										id="Wickets"></label>
+								</div>
+							</div>
+						</div>
+						<!-- 	<div class="col-2 ">
 							<label for="firstName" class="fw-light" style="margin-top: 5%"> Batstyle :</label>
 							<br>
 							<label class="fw-bold" id="Batstyle"></label>
@@ -154,14 +244,18 @@
 								 <label
 								for="firstName" class="fw-light" style="margin-top: 5%"> Total Runs :</label>
 								 <br>
-								 <label class="fw-bold" id="Runs"></label>
+								 <label class="fw-bold display-6" id="Runs"></label>
 								 <br>
 								<label
 								for="firstName" class="fw-light" style="margin-top: 5%"> Twenties :</label> 
 							<br>
 							<label class="fw-bold" id="Twenties"></label>
 							<br>
-						</div>
+						</div> -->
+
+
+
+						<!-- 	
 						<div class="col-2 ">
 							<label for="firstName" class="fw-light" style="margin-top: 5%"> Thirties :</label>
 							<br>
@@ -177,8 +271,11 @@
 								 <br>
 								 <label class="fw-bold display-6" id="Highest"></label>
 								<br>
-						</div>
-						<div class="col-2 ">
+						</div> -->
+
+
+
+						<!-- <div class="col-2 ">
 							<label for="firstName" class="fw-light" style="margin-top: 5%"> BallStyle
 								:</label> 
 								<br>
@@ -190,12 +287,12 @@
 							<label class="fw-bold display-6" id="Wickets"></label>
 						<br>
 								
-						</div>
+						</div> -->
 
 
 					</div>
-					<hr>
-					<div class="row mx-3" id="Bidding-Details">
+					<hr style="margin:0.6rem">
+					<div class="row mx-3" id="Bidding-Details" style="height: 60px;">
 						<div class="col-2">
 							<select class="form-select" aria-label="Default select example"
 								style="margin-top: 18%" id="team" required="required">
@@ -216,8 +313,6 @@
 						</div>
 						<div class="col-2 my-3">
 
-
-
 							<div class="input-group py-3">
 								<div class="input-group-prepend">
 									<button class="btn btn-outline-secondary" id="decrease-btn"
@@ -225,14 +320,14 @@
 								</div>
 								<input type="text" class="form-control" id="Increased"
 									onkeyup="increasePrice()" placeholder="Increased By"
-									aria-label="Increased By" aria-describedby="basic-addon2"
 									readonly="readonly" value="0">
 								<div class="input-group-append">
 									<button class="btn btn-outline-secondary" id="increase-btn"
 										type="button" onclick="increaseBidAmount()">+</button>
 								</div>
-								<p id="max-bid">
-								<p id="tooltip">Cannot Exceed Maximum Bid</p>
+								<p id="max-bid" style="font-size: 0.9rem;">
+								<p id="tooltip" style="font-size: 0.9rem;">Cannot Exceed
+									Maximum Bid</p>
 							</div>
 
 						</div>
@@ -251,26 +346,34 @@
 					</div>
 
 					<div class="row my-4 ">
-						<div class="col-2 ">
-							<button class="btn btn-success " style="font-size: 20px"
+						<div class="col-1" style="width: 12.33333333%">
+							<button class="btn btn-success " style="font-size: 13px"
 								onclick="sold()" id="sold-btn">
 								SOLD <span class="fa fa-check"></span>
 							</button>
 						</div>
-						<div class="col-2">
-							<button class="btn btn-danger" style="font-size: 20px"
+						<div class="col-1" style="width: 12.33333333%">
+							<button class="btn btn-danger" style="font-size: 13px"
 								onclick="unSold()" id="unsold-btn">
 								UNSOLD <span class="fa fa-times"></span>
 							</button>
 						</div>
-						<div class="col-2 offset-4" id="previous-button"></div>
+						<div class="col-5" id="soldTeamName"></div>
+						<div class="col-2" id="previous-button" ></div>
 						<div class="col-2 " id="next-button"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	
+	
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+		crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
@@ -311,11 +414,11 @@
 	function increaseBidAmount(){
 		$('#decrease-btn').show()
 		let increaseAmount=$('#Increased').val()
+		let basePrice=Number($('#Base-Price').val());
 		let increaseValue=Number(increaseBy)+Number(increaseAmount)
-		console.log(increaseValue)
-		if(increaseValue<=maxBidAmount){
+		if(increaseValue+basePrice<=maxBidAmount){
 			$('#Increased').val(increaseValue)
-			$('#Total-Price').val(Number($('#Increased').val()) +Number($('#Base-Price').val()))
+			$('#Total-Price').val(Number($('#Increased').val()) +basePrice)
 		}else{
 			
 			$('#increase-btn').hide()
@@ -372,6 +475,7 @@
 				"pageNo" : pageno,
 				"filter" :filter
 			}
+				console.log(data)
 		 
 			$.ajax({
 
@@ -390,6 +494,8 @@
 					else{
 						console.log(result)
 						if(result.filter=="sold"){
+						
+							$('#soldTeamName').html('<Strong>PlayerSold to Team : <Strong style="color:blue">' + result.data.teamName + '</Strong>')
 							
 							$('#soldimg').show()
 							$('#sold-btn').hide()
@@ -397,11 +503,14 @@
 							$('#Bidding-Details').hide()
 						}
 						else{
+						
+							$('#soldTeamName').html('')
 							$('#soldimg').hide()
 							$('#sold').hide()
 							$('#sold-btn').show()
 							$('#unsold-btn').show()
 							$('#Bidding-Details').show()
+							$('#Increased').val('0')
 						}
 						resultSize=result.size
 						increaseBy=result.increase;
@@ -410,12 +519,12 @@
 						if(Number(pageNext)==1){
 							$('#previous-button').html('');
 						}else{
-							$('#previous-button').html('<button class="btn btn-warning" onclick="previous()"><span class="fa fa-angle-double-left"></span> Previous</button>');
+							$('#previous-button').html('<button class="btn btn-warning" onclick="previous()" style="font-size: 13px"><span class="fa fa-angle-double-left"></span> Previous</button>');
 						}
 						if( Number(pageNext)==Number(resultSize)){
 							$('#next-button').html('');
 						}else{			
-							$('#next-button').html('<button class="btn btn-primary" onclick="next()"> Next<span class="fa fa-angle-double-right"></span></button>')
+							$('#next-button').html('<button class="btn btn-primary" onclick="next()" style="font-size: 13px"> Next<span class="fa fa-angle-double-right"></span></button>')
 						}
 					$('#playerDetailCard').show()
 					
@@ -430,7 +539,7 @@
 					$('#Hundreds').text(result.data.hundreds)
 					$('#Highest').text(result.data.highestRuns)
 					$('#Over').text(result.data.bestOver)
-					$('#Total-Price').text(result.data.minimumBid)
+					$('#Total-Price').val(result.data.minimumBid)
 
 					$('#playerCount').html('('+pageNext+'/'+resultSize+')')
 					if (result.data.playerBatStyle == null) {
@@ -509,7 +618,7 @@
 			}else{
 				$('#team').css('border-color','green')
 			
-		let name=$('#name').val()
+		let name=$('#name').text()
 		let totalPrice=$('#Total-Price').val()
 		let sold=true
 		let data={
@@ -561,11 +670,76 @@
 				
 				
 			})
-	
 		}
 		
+	/* 	<div class="col-4">
+		<div class="card mx-2 mx-4 bg-dark bg-gradient shadow-lg mb-2 p-3 rounded">
+		<div class="card-body text-white">
+			<h6 class="card-title text-center">Team Name</h6>
+			<div class="row">
+			<div class="col-3">
+			</div>
+			<h6>PLAYERS LEFT : 20/10</h6>
+			<h6>PURSE LEFT :20/10000 </h6>
+			</div>
+			</div>
+				
+			</div>
+			</div> */
 		
 		
+		function getTeamDetails(){
+		 	$.ajax({
+		 		type:"POST",
+		 		contentType : 'application/json; charset=utf-8',
+				url:'teamdetails',
+				dataType : 'json',
+				data:{"data":"data"},
+		 		
+				success:function(result){
+					
+					$('#modal-row').html('')
+					/* console.log(result.data[0]) */
+				
+					result.data.forEach(function(item) {
+						
+						let htmlvar= '<div class="col-4">'+
+						'<div class="card mx-2 mx-4 bg-gradient shadow-lg mb-2 p-3 rounded"style="--bs-card-bg: #d97462" > '+
+						'<div class="card-body">'+
+							'<div class="card-title text-center"><h6 style="font-weight: 1000;font-size:0.9rem">'+item.teamName+'</h6></div>'+
+							'<div class="row">'+
+							
+							'<div class="col-3">'+
+							'</div>'+
+							'<h6 style="font-size:0.8rem">PLAYERS LEFT :'+item.playersCount+'/20</h6>'+
+							'<h6 style="font-size:0.8rem">PURSE LEFT :'+item.purseLeft+'/10000 </h6>'+
+							'</div>'+
+							'</div>	'+
+							'</div>'+
+							'</div>'
+							
+							
+							
+							
+						
+						$('#modal-row').append(htmlvar)
+						
+					    console.log(item.teamName)
+					});
+					
+					
+					
+				},
+				 error: function(xhr, status, error) {
+					 console.log(error)
+				 	
+				 }
+			}) 
+			
+			
+			
+			
+		}
 		
 	</script>
 </body>

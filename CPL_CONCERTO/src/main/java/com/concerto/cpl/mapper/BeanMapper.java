@@ -9,8 +9,10 @@ import com.concerto.cpl.dto.AuctionDataDto;
 import com.concerto.cpl.dto.PlayerDataDto;
 import com.concerto.cpl.dto.PlayerDetailsInTeamDto;
 import com.concerto.cpl.dto.PlayerResponseDto;
+import com.concerto.cpl.dto.TeamDetailsDto;
 import com.concerto.cpl.entity.Auction;
 import com.concerto.cpl.entity.Player;
+import com.concerto.cpl.entity.Team;
 
 @Scope
 public class BeanMapper {
@@ -41,6 +43,9 @@ public class BeanMapper {
 		playerDataDto.setHundreds(player.getHundreds());
 		playerDataDto.setBestOver(player.getBestOver());
 		playerDataDto.setHighestRuns(player.getHighestRuns());
+		if(player.getTeam()!=null) {			
+			playerDataDto.setTeamName(player.getTeam().getTeamName());
+		}
 		return playerDataDto;
 	}
 	
@@ -67,8 +72,6 @@ public class BeanMapper {
 		return dto;
 		
 	}
-	
-	
-	
+		
 
 }

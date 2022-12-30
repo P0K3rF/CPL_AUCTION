@@ -20,6 +20,10 @@
 	height: 15vw;
 	object-fit: fill;
 }
+.padx{
+    padding-right: 1rem!important;
+    padding-left: 8rem!important;
+    }
 /* Style the tab */
 .tab {
 	overflow: hidden;
@@ -104,12 +108,12 @@ tr:nth-child(even) {
 		<div class="container" id="main-container">
 			<div class="card shadow  mb-2 bg-white rounded h-8 my-3 mx-3">
 				<div class="card-title my-2">
-					<div class="row">
-						<div class="col-5 offset-4">
+					<div class="row" >
+						<div class="col-3 offset-4">
 							<h3>${name.toUpperCase()}${year}</h3>
 						</div>
-						<div class="col-2 ">
-							<button class="btn btn-success rounded-pill btn-lg"
+						<div class="col-4 offset-1 padx" >
+							<button class="btn btn-success rounded-pill btn-md"
 								onclick="auctionPage()">Auction Page</button>
 						</div>
 					</div>

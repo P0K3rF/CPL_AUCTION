@@ -21,7 +21,26 @@
 <link rel="stylesheet" href="/css/style.css">
 <style>
 .card-img-top {
-	object-fit: contain;
+	width: 60%;
+	height: 15vw;
+	object-fit: fill;
+}
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: #212529;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #212529;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 75%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    }
+.table-bordered td, .table-bordered th {
+    border: -5px solid #dee2e6;
 }
 </style>
 
@@ -30,17 +49,35 @@
 </head>
 <body>
 
-
-	<div class="container my-3">
-		<div class="table-responsive">
+	<div class="row my-2" style="border:2px solid green">
+	<div class="col-1 my-3">
+	<a class="btn btn-success text-white" onclick="previousPage()" role="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+	</div>
+	<div class="col-5 align-items-center my-2" style="width: 37.6666666667%;">
+			<div class="card mx-2 mx-4 bg-dark bg-gradient shadow-lg p-3 mb-5 rounded">
+				<div class="card-body text-white">
+					<h5 class="card-title text-center">${teamDetails.teamName}</h5>
+					<div class="row">
+					<div class="col-4">
+					<img class="card-img-top img-fluid img-responsive"
+							src="../images/${teamDetails.profilePhoto}"
+							alt="Default" style="height: 130px; width: 200px;">
+					</div>
+					<div class="col-8  py-4">
+					<h6>OWNER : ${ownerName}</h6>
+					<h6>PLAYERS LEFT : ${remainingPlayers}/${totalPlayer}</h6>
+					<h6>PURSE LEFT : ${purseLeft}/${PointsPerTeam}</h6>
+					</div>
+					</div>
+						
+					</div>
+					</div>
+			</div>
+			
+			<div class="col-6 py-2 text-center">
+				<div class="table-responsive mx-4">
 			<table
 				class="table table-hover table-bordered table-info border-warning">
-				<thead>
-				<tr>
-				<th> <img class="card-img-top img-fluid img-responsive"
-							src="../images/${teamDetails.profilePhoto}"
-							alt="Default" style="height: 100px; width: 150px;"></th>
-				</thead>
 				<thead>
 					<tr>
 					<th>Player</th>
@@ -50,28 +87,36 @@
 				</tr>
 				</thead>
 				<tbody>
+				<c:forEach items="${playerList}" var="playerIterate">
 					<tr>
-						<th scope="row">1</th>
-						<td>Sit</td>
-						<td>Amet</td>
-						<td>Consectetur</td>
+					 <td><img src="../images/${playerIterate.profilePhoto}" height="30" width="30" onerror=this.src="../images/defaultprofile.png"	></td>
+						<td>${playerIterate.playerName }</td>
+						<td>${playerIterate.categoryName }</td>
+						<td>${playerIterate.finalBidPrice}</td>
+						
+						
 					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Adipisicing</td>
-						<td>Elit</td>
-						<td>Sint</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Hic</td>
-						<td>Fugiat</td>
-						<td>Temporibus</td>
-					</tr>
+				</c:forEach>
+				
 				</tbody>
 
 			</table>
 		</div>
+			
+			</div>
+			
+		
+			
+			
+			
+			</div>
+		<%-- 
+	<h5 class="card-title">OWNER : ${ownerName}</h5>
+					<h5 class="card-title">PLAYERS : ${remainingPlayers}/20</h5>
+					<h5 class="card-title">PURSE LEFT : ${purseLeft}/8500</h5> --%>
+	
+	
+	<!-- 	 -->
 	</div>
 
 
@@ -137,6 +182,9 @@
 	<script>
 		function auction() {
 			window.location.href = "http://localhost:8083/auction";
+		}
+		function previousPage(){
+			 window.history.back()
 		}
 	</script>
 

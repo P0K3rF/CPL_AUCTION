@@ -1,6 +1,7 @@
 package com.concerto.cpl.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +27,11 @@ import com.concerto.cpl.dto.AuctionRequestDto;
 import com.concerto.cpl.dto.CategoryAndPageDto;
 import com.concerto.cpl.dto.PlayerDataDto;
 import com.concerto.cpl.dto.ResponseData;
+import com.concerto.cpl.dto.TeamDetailsDto;
 import com.concerto.cpl.entity.Auction;
 import com.concerto.cpl.entity.Category;
 import com.concerto.cpl.entity.Player;
+import com.concerto.cpl.entity.Team;
 import com.concerto.cpl.mapper.BeanMapper;
 import com.concerto.cpl.service.AuctionMasterService;
 import com.concerto.cpl.service.AuctionService;
@@ -89,6 +93,7 @@ public class AjaxControllers {
 	@PostMapping("/insertauctiondata")
 	public @ResponseBody ResponseData<Object> addAuctionData(@RequestBody AuctionRequestDto auctionRequestDto,
 			HttpSession session) {
+		System.out.println(auctionRequestDto);
 		AuctionDataDto auctionDataDto = new AuctionDataDto();
 		auctionDataDto.setAuctionMasterId(
 				this.auctionMasterService.getAuctionIdByAuctionName((String) session.getAttribute("auction")));
@@ -121,9 +126,32 @@ public class AjaxControllers {
 		                    .collect(Collectors.toList());
 	
 	
-		return new ResponseData<>(200, players);
-		
-		
-		
+		return new ResponseData<>(200, players);	
 	}
+	
+	@PostMapping("/teamdetails")
+	public @ResponseBody ResponseData<Object> getTeamData(){
+		 
+		try{
+			List<TeamDetailsDto> list=new ArrayList<>();
+		
+		  
+			 for(Team t: this.	teamService.getAllTeam())
+			 {
+				  TeamDetailsDto dt=new TeamDetailsDto();
+				  dt.setTeamImage(t.getProfilePhoto());
+				  dt.setTeamName(t.getTeamName());
+				  dt.setPurseLeft(this.auctionService.getReaminingPrice(t.getTeamId()));
+				  dt.setPlayersCount(this.auctionService.getSoldPlayerCount(t.getTeamId()));
+				  list.add(dt);
+			 }
+			 return new ResponseData<>(200,list);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseData<>(400,"Error server side");
+		}
+	}
+	
+	
 }

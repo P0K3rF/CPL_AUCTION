@@ -33,5 +33,6 @@ public class PlayerDataDto {
 	private String bestOver;
 	private int increaseBy;
 	private int maximum_bid;
+	private String teamName;
 	
 }

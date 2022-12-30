@@ -40,4 +40,12 @@ public class AuctionMasterService {
 		throw new EntityNotFoundException("Auction not found");
 	}
 	
+	public Integer getPlayerPerTeam(int auctionId) {
+		return this.auctionMasterRepository.findById(auctionId).get().getPlayerPerTeam();
+	}
+	
+	public Integer getPointsPerTeam(int auctionId) {
+		return Integer.parseInt(this.auctionMasterRepository.findById(auctionId).get().getPointsPerTeam());
+	}
+	
 }
