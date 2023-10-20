@@ -49,7 +49,7 @@
 								</div>
 								<div class="card-footer text-center">
 									<a class="btn btn-outline-warning text-dark"
-										href="http://10.10.11.35:8083/auctioninfo?name=${auction.auctionName}"
+										href="<%request.getContextPath();%>/auctioninfo?name=${auction.auctionName}"
 										id="addCart">Go to ${auction.auctionName} </a>
 								</div>
 							</div>

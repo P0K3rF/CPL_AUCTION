@@ -178,7 +178,7 @@ tr:nth-child(even) {
 											</div>
 											<div class="card-footer align-items-center d-flex justify-content-center">
 												<a class="btn btn-outline-warning text-dark "
-													href="http://10.10.11.35:8083/teamdetails?teamId=${teams.teamId}"
+													href="<%request.getContextPath();%>/teamdetails?teamId=${teams.teamId}"
 													id="addCart"><h6>View Profile</h6> </a>
 											</div>
 										</div>
@@ -268,26 +268,6 @@ tr:nth-child(even) {
 							            return rgb;
 
 							        }
-									
-									
-									
-									
-							    
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 									</script>
 								</c:forEach>
 							</div>
@@ -315,7 +295,7 @@ tr:nth-child(even) {
 										</div>
 										<div class="card-footer text-center">
 											<a class="btn btn-outline-warning text-dark"
-												href="http://10.10.11.35:8083/auctioninfo?n=cpl&y=2021"
+												href="<%request.getContextPath();%>/auctioninfo?name=cpl&y=2021"
 												id="addCart">View Profile </a>
 										</div>
 
@@ -440,7 +420,7 @@ tr:nth-child(even) {
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();
 		function auctionPage() {
-			window.location.href = "http://10.10.11.35:8083/auction";
+			window.location.href = <%=request.getContextPath()%>"/auction";
 		}
 		
 

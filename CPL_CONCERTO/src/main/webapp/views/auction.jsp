@@ -320,12 +320,12 @@
 								</div>
 								<input type="text" class="form-control" id="Increased"
 									onkeyup="increasePrice()" placeholder="Increased By"
-									readonly="readonly" value="0">
+									readonly="readonly" value="0" style=" margin-left: 6px;">
 								<div class="input-group-append">
 									<button class="btn btn-outline-secondary" id="increase-btn"
 										type="button" onclick="increaseBidAmount()">+</button>
 								</div>
-								<p id="max-bid" style="font-size: 0.9rem;">
+								<p id="max-bid" style="font-size: 0.9rem;margin-left: 42px">
 								<p id="tooltip" style="font-size: 0.9rem;">Cannot Exceed
 									Maximum Bid</p>
 							</div>
@@ -412,7 +412,7 @@
 	
 	//Function increaseBidAmount
 	function increaseBidAmount(){
-		$('#decrease-btn').show()
+    $("#decrease-btn").css("visibility", "visible");
 		let increaseAmount=$('#Increased').val()
 		let basePrice=Number($('#Base-Price').val());
 		let increaseValue=Number(increaseBy)+Number(increaseAmount)
@@ -421,7 +421,7 @@
 			$('#Total-Price').val(Number($('#Increased').val()) +basePrice)
 		}else{
 			
-			$('#increase-btn').hide()
+			    $("#increase-btn").css("visibility", "hidden");
 			 $("#tooltip").show();
 			
 		}
@@ -429,7 +429,7 @@
 		
 	}
 	function	decreaseBidAmount(){
-		$('#increase-btn').show()
+		    $("#increase-btn").css("visibility", "visible");
 		 $("#tooltip").hide();
 		let increaseAmount=$('#Increased').val()
 		let decreaseValue=Number(increaseAmount)-Number(increaseBy);
@@ -438,7 +438,7 @@
 		$('#Increased').val(decreaseValue)
 		$('#Total-Price').val(Number($('#Increased').val()) +Number($('#Base-Price').val()))
 		}else{
-			$('#decrease-btn').hide()
+	    $("#decrease-btn").css("visibility", "hidden");
 		}
 		
 	}
@@ -448,8 +448,8 @@
 		var resultSize=0;
 		var pageNext=0;
 		function searchPlayer(pageno) {
-			$('#increase-btn').show()
-			$('#decrease-btn').hide()
+			    $("#increase-btn").css("visibility", "visible");
+	    $("#decrease-btn").css("visibility", "hidden");
 			$("#tooltip").hide();
 			$("#team").prop("selectedIndex", 0);
 			let category = $('#category').find(":selected").val();
