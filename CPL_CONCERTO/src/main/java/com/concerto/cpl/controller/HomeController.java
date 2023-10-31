@@ -27,6 +27,7 @@ import com.concerto.cpl.service.TeamService;
 @Controller
 public class HomeController {
 
+	
 	@Autowired
 	TeamService teamService;
 	@Autowired
